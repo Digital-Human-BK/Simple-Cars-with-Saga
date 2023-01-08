@@ -15,7 +15,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-console.log('Hello world');
+console.log('Hello');
 
 root.render(
   <Provider store={store}>
