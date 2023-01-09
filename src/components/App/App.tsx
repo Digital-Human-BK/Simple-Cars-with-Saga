@@ -5,8 +5,9 @@ import './App.scss';
 // Components
 import { RootState, useAppSelector } from '../../configureStore';
 import Home from '../../containers/Home/Home';
-import CustomRedirect from '../CustomRedirect/CustomRedirect';
 import SignIn from '../../containers/SignIn/SignIn';
+import SignUp from '../../containers/SignUp/SignUp';
+import CustomRedirect from '../CustomRedirect/CustomRedirect';
 // TODO: IMPORT PAGES TO WHICH USER WILL BE REDIRECT
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
         }
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<SignIn />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<SignUp />} />
         {/* <Navigate to="/home" /> */}
       </Routes>
     </div>
