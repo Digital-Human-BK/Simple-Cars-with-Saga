@@ -29,6 +29,8 @@ function App() {
           // 'home' is just for the example
         }
         <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
         {/* <Navigate to="/home" /> */}
       </Routes>
     </div>
