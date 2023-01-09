@@ -6,6 +6,7 @@ import './App.scss';
 import { RootState, useAppSelector } from '../../configureStore';
 import Home from '../../containers/Home/Home';
 import CustomRedirect from '../CustomRedirect/CustomRedirect';
+import SignIn from '../../containers/SignIn/SignIn';
 // TODO: IMPORT PAGES TO WHICH USER WILL BE REDIRECT
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
           // 'home' is just for the example
         }
         <Route path="/" element={<Home />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<SignIn />} />
         <Route path="/" element={<Home />} />
         {/* <Navigate to="/home" /> */}
       </Routes>

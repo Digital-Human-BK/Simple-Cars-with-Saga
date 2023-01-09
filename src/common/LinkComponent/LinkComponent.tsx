@@ -4,10 +4,9 @@ import { useNavigate } from 'react-router-dom';
 type LinkComponentProps = {
   children: string;
   path: string;
-  styles: object;
 };
 
-function LinkComponent({ children, path, styles }: LinkComponentProps) {
+function LinkComponent({ children, path }: LinkComponentProps) {
   const navigate = useNavigate();
   return (
     // eslint-disable-next-line jsx-a11y/anchor-is-valid
@@ -15,7 +14,7 @@ function LinkComponent({ children, path, styles }: LinkComponentProps) {
       onClick={() => navigate(path)}
       variant="body2"
       underline="hover"
-      sx={{ cursor: 'pointer', ...styles }}
+      sx={{ cursor: 'pointer' }}
     >
       {children}
     </Link>
