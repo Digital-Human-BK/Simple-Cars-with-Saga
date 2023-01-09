@@ -40,7 +40,12 @@ export default function SignUp() {
     showPassword: false,
     handleToggleShowPassword: () => {},
     handleMouseDownPassword: () => {},
-    userCredentials: { username: 'Mike', password: '123' },
+    userCredentials: {
+      firstName: 'Mike',
+      lastName: 'Shinoda',
+      username: 'MikeLP',
+      password: '123',
+    },
     inputErrors: false,
     handleChange: () => {},
     handleRegisterSubmit: () => {},
@@ -80,6 +85,7 @@ export default function SignUp() {
                   id="firstName"
                   name="firstName"
                   label="First Name"
+                  value={userCredentials.firstName}
                   // error={!!inputErrors.firstNameError}
                   // helperText={inputErrors.firstNameError}
                   onChange={(ev) => handleChange()}
@@ -92,6 +98,7 @@ export default function SignUp() {
                   id="lastName"
                   label="Last Name"
                   name="lastName"
+                  value={userCredentials.lastName}
                   // error={!!inputErrors.lastNameError}
                   // helperText={inputErrors.lastNameError}
                   onChange={(ev) => handleChange()}
@@ -104,6 +111,7 @@ export default function SignUp() {
                   id="username"
                   label="Username"
                   name="username"
+                  value={userCredentials.username}
                   // error={!!inputErrors.usernameError}
                   // helperText={inputErrors.usernameError}
                   onChange={(ev) => handleChange()}
