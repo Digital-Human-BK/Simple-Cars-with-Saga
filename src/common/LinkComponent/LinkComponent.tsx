@@ -9,7 +9,6 @@ type LinkComponentProps = {
 function LinkComponent({ children, path }: LinkComponentProps) {
   const navigate = useNavigate();
   return (
-    // eslint-disable-next-line jsx-a11y/anchor-is-valid
     <Link
       onClick={() => navigate(path)}
       variant="body2"
