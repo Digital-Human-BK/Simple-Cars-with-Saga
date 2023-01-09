@@ -23,6 +23,8 @@
     "no-console": "off",
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/default-param-last": "off",
+    "react/jsx-props-no-spreading": "off",
+    "jsx-a11y/anchor-is-valid": "off",
     "prettier/prettier": [
       "error",
       {
