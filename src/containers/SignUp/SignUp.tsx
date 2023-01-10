@@ -88,7 +88,7 @@ export default function SignUp() {
                   value={userCredentials.firstName}
                   // error={!!inputErrors.firstNameError}
                   // helperText={inputErrors.firstNameError}
-                  onChange={(ev) => handleChange()}
+                  onChange={() => handleChange()}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -101,7 +101,7 @@ export default function SignUp() {
                   value={userCredentials.lastName}
                   // error={!!inputErrors.lastNameError}
                   // helperText={inputErrors.lastNameError}
-                  onChange={(ev) => handleChange()}
+                  onChange={() => handleChange()}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -114,7 +114,7 @@ export default function SignUp() {
                   value={userCredentials.username}
                   // error={!!inputErrors.usernameError}
                   // helperText={inputErrors.usernameError}
-                  onChange={(ev) => handleChange()}
+                  onChange={() => handleChange()}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -130,7 +130,7 @@ export default function SignUp() {
                     id="outlined-adornment-password"
                     type={showPassword ? 'text' : 'password'}
                     value={userCredentials.password}
-                    onChange={(ev) => handleChange()}
+                    onChange={() => handleChange()}
                     // error={!!inputErrors.passwordError}
                     endAdornment={
                       <InputAdornment position="end">
