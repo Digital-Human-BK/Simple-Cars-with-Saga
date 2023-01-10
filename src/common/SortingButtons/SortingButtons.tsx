@@ -4,11 +4,12 @@ import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined
 // import { useAppDispatch } from '../../configureStore';
 // import { sortCars } from '../../../store/catalog-slice';
 
-type SortingButtonsProps = {
-  sortBy: string;
-};
+// type SortingButtonsProps = {
+//   sortBy: string;
+// };
+// use this as props later: { sortBy }: SortingButtonsProps
 
-function SortingButtons({ sortBy }: SortingButtonsProps) {
+function SortingButtons() {
   // const dispatch = useAppDispatch();
 
   const handleAscendingSort = () => {
