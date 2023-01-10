@@ -82,7 +82,7 @@ export default function SignIn() {
                   label="Username"
                   name="username"
                   autoFocus
-                  onChange={(ev) => handleChange()}
+                  onChange={() => handleChange()}
                   value={userCredentials.username}
                   // error={!!inputErrors.usernameError}
                   // helperText={inputErrors.usernameError}
@@ -101,7 +101,7 @@ export default function SignIn() {
                     name="password"
                     type={showPassword ? 'text' : 'password'}
                     value={userCredentials.password}
-                    onChange={(ev) => handleChange()}
+                    onChange={() => handleChange()}
                     // error={!!inputErrors.passwordError}
                     endAdornment={
                       <InputAdornment position="end">
