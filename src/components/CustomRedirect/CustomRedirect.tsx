@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-// Redux
-import { useSelector } from 'react-redux';
-import { RootState } from '../../configureStore';
+
+import { selectRedirectPath, useAppSelector } from '../../configureStore';
 
 /** Redirect to pre-selected page */
 function CustomRedirect() {
-  /** Object which contains parameters to next page {pathname: ... , state: ...} */
-  const { redirect } = useSelector((state: RootState) => state.redirect);
+  const redirect = useAppSelector(selectRedirectPath);
 
   const [redirectPath, setRedirectPath] = useState(redirect);
 
@@ -20,7 +18,7 @@ function CustomRedirect() {
     setRedirectPath(redirect);
   }, [redirect]);
 
-  return redirectPath ? <Navigate to={redirectPath} /> : null;
+  return redirectPath ? <Navigate to={redirectPath} replace /> : null;
 }
 
 export default CustomRedirect;

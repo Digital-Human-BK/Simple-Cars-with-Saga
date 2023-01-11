@@ -1,4 +1,4 @@
-import { REDIRECT } from '../components/CustomRedirect/types';
+import REDIRECT from '../components/CustomRedirect/types';
 
 export const initialState = {
   redirect: '',
@@ -12,7 +12,6 @@ function redirectReducer(
     /** Action Creator - Redirect to passed screen */
     case REDIRECT:
       return {
-        ...state,
         redirect: action.payload,
       };
     default:

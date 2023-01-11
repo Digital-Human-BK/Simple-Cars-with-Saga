@@ -1,39 +1,28 @@
 // Router
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
 // Style
 import './App.scss';
 // Components
-// import { RootState, useAppSelector } from '../../configureStore';
+import { selectUser, useAppSelector } from '../../configureStore';
 import Home from '../../containers/Home/Home';
 import SignIn from '../../containers/SignIn/SignIn';
 import SignUp from '../../containers/SignUp/SignUp';
-import CustomRedirect from '../CustomRedirect/CustomRedirect';
-// TODO: IMPORT PAGES TO WHICH USER WILL BE REDIRECT
 
 function App() {
-  // const userSessionInfo = useAppSelector((state: RootState) => state);
-  const isUserLoggedIn = false;
-  //= userSessionInfo.isLoggedIn;
-
-  const windowLocation = window.location;
-  const windowURL = windowLocation.pathname;
+  const location = useLocation();
+  const user = useAppSelector(selectUser);
 
   return (
     <div className="App">
-      <CustomRedirect />
-      {isUserLoggedIn &&
-      (windowURL === '/login' || windowURL === '/register') ? (
-        <Navigate to="/cars" />
+      {user !== null &&
+      (location.pathname === '/login' || location.pathname === '/register') ? (
+        <Navigate to="/" replace />
       ) : null}
+
       <Routes>
-        {
-          // TODO: Set route-s
-          // 'home' is just for the example
-        }
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/register" element={<SignUp />} />
-        {/* <Navigate to="/home" /> */}
       </Routes>
     </div>
   );
