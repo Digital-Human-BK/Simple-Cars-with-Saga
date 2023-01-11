@@ -1,10 +1,8 @@
 import REDIRECT from './types';
 
-function redirect(destination: string) {
+export default function redirect(destination: string) {
   return {
     type: REDIRECT,
     payload: destination,
   };
 }
-
-export default redirect;
