@@ -35,5 +35,10 @@ export const selectUser = (state: RootState) => state.auth.userData;
 export const selectAuthError = (state: RootState) => state.auth.error;
 export const selectAuthLoading = (state: RootState) => state.auth.loading;
 
+export const selectAllCars = (state: RootState) => state.catalog.filteredCars;
+export const selectCatalogError = (state: RootState) => state.catalog.error;
+export const selectCatalogLoading = (state: RootState) => state.catalog.loading;
+
 export const selectRedirectPath = (state: RootState) => state.redirect.redirect;
+
 export default store;
