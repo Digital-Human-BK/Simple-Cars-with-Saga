@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
@@ -19,45 +20,61 @@ import Toast from '../../common/Toast/Toast';
 import Copyright from '../../common/Copyright/Copyright';
 import LinkComponent from '../../common/LinkComponent/LinkComponent';
 
-// import useLogin from '../../hooks/useLogin';
-// import { appRoutes } from '../../constants/appRoutes';
+import { InputsTouched, LoginUser } from '../../interfaces/User';
+import validateLogin from '../../utils/validateLogin';
+import {
+  useAppSelector,
+  useAppDispatch,
+  selectAuthError,
+  selectAuthLoading,
+} from '../../configureStore';
+import { loginRequest } from './actions';
+
+type ChangeEvent = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 export default function SignIn() {
-  // const {
-  //   error,
-  //   loading,
-  //   showPassword,
-  //   handleToggleShowPassword,
-  //   handleMouseDownPassword,
-  //   userCredentials,
-  //   inputErrors,
-  //   handleChange,
-  //   handleLoginSubmit,
-  // } = useLogin();
+  const dispatch = useAppDispatch();
+  const error = useAppSelector(selectAuthError);
+  const loading = useAppSelector(selectAuthLoading);
 
-  const mock = {
-    error: null,
-    loading: false,
-    showPassword: false,
-    handleToggleShowPassword: () => {},
-    handleMouseDownPassword: () => {},
-    userCredentials: { username: 'Mike', password: '123' },
-    inputErrors: false,
-    handleChange: () => {},
-    handleLoginSubmit: () => {},
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [inputsTouched, setInputsTouched] = useState<InputsTouched>({
+    username: false,
+    password: false,
+  });
+  const [userCredentials, setUserCredentials] = useState<LoginUser>({
+    username: '',
+    password: '',
+  });
+
+  const handleToggleShowPassword = () => {
+    setShowPassword((prevState) => !prevState);
   };
 
-  const {
-    error,
-    loading,
-    showPassword,
-    handleToggleShowPassword,
-    handleMouseDownPassword,
-    userCredentials,
-    // inputErrors,
-    handleChange,
-    handleLoginSubmit,
-  } = mock;
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
+
+  const handleChange = (ev: ChangeEvent) => {
+    setInputsTouched((prevState) => ({
+      ...prevState,
+      [ev.target.name]: true,
+    }));
+    setUserCredentials((prevState) => ({
+      ...prevState,
+      [ev.target.name]: ev.target.value.trim(),
+    }));
+  };
+
+  const handleLoginSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+    ev.preventDefault();
+
+    dispatch(loginRequest(userCredentials));
+  };
+
+  const inputErrors = validateLogin(userCredentials, inputsTouched);
 
   return (
     <Box component="main" sx={signInStyles.main}>
@@ -82,17 +99,17 @@ export default function SignIn() {
                   label="Username"
                   name="username"
                   autoFocus
-                  onChange={() => handleChange()}
+                  onChange={handleChange}
                   value={userCredentials.username}
-                  // error={!!inputErrors.usernameError}
-                  // helperText={inputErrors.usernameError}
+                  error={!!inputErrors.usernameError}
+                  helperText={inputErrors.usernameError}
                 />
               </Grid>
               <Grid item xs={12}>
                 <FormControl variant="outlined" fullWidth>
                   <InputLabel
                     htmlFor="outlined-adornment-password"
-                    // error={!!inputErrors.passwordError}
+                    error={!!inputErrors.passwordError}
                   >
                     Password
                   </InputLabel>
@@ -101,8 +118,8 @@ export default function SignIn() {
                     name="password"
                     type={showPassword ? 'text' : 'password'}
                     value={userCredentials.password}
-                    onChange={() => handleChange()}
-                    // error={!!inputErrors.passwordError}
+                    onChange={handleChange}
+                    error={!!inputErrors.passwordError}
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton
@@ -118,7 +135,7 @@ export default function SignIn() {
                     label="Password"
                   />
                   <FormHelperText error>
-                    {/* {inputErrors.passwordError} */}
+                    {inputErrors.passwordError}
                   </FormHelperText>
                 </FormControl>
               </Grid>
@@ -128,7 +145,7 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={signInStyles.submit}
-              // disabled={inputErrors.formDisabled}
+              disabled={inputErrors.formDisabled}
             >
               Sign In
             </Button>

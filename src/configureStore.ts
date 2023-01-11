@@ -31,5 +31,8 @@ export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
+export const selectAuthError = (state: RootState) => state.auth.error;
+export const selectAuthLoading = (state: RootState) => state.auth.loading;
+
 export const selectRedirectPath = (state: RootState) => state.redirect.redirect;
 export default store;
