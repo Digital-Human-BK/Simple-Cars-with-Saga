@@ -30,7 +30,6 @@ function* authorizeUser(
 export default function* loginSaga(loginApi: LoginApi): unknown {
   while (true) {
     const loginRequest = yield take(LOGIN_REQUEST);
-    console.log('check for loop');
 
     if (loginRequest.payload) {
       const loginCredentials = loginRequest.payload;
