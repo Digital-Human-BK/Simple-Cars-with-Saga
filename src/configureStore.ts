@@ -13,7 +13,7 @@ import rootReducer from './reducers/rootReducer';
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['redirect'],
+  blacklist: ['redirect', 'catalog'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
