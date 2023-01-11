@@ -41,7 +41,7 @@ function catalogReducer(state = initialState, action: AnyAction) {
         error: action.payload,
       };
     default:
-      return initialState;
+      return state;
   }
 }
 

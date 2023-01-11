@@ -65,7 +65,7 @@ function authReducer(state = initialState, action: AnyAction) {
       };
 
     default:
-      return initialState;
+      return state;
   }
 }
 
