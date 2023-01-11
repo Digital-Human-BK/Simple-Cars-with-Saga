@@ -8,9 +8,7 @@ type GetCarsApi = () => void;
 function* getAllCars(getCarsApi: GetCarsApi): unknown {
   try {
     const response = yield call(getCarsApi);
-    if (response.ok !== 200) {
-      throw new Error('Something went wrong');
-    }
+    console.log(response);
     yield put(getCarsSuccess(response.data));
   } catch (err) {
     let message = 'Fetch data error';

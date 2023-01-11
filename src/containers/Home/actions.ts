@@ -21,16 +21,16 @@ export function getCars() {
   };
 }
 
-export function getCarsSuccess(cars: Car[]) {
+export function getCarsSuccess(payload: Car[]) {
   return {
     type: GET_CARS_SUCCESS,
-    payload: cars,
+    payload,
   };
 }
 
-export function getCarsError(errorMsg: string) {
+export function getCarsError(payload: string) {
   return {
     type: GET_CARS_ERROR,
-    payload: errorMsg,
+    payload,
   };
 }

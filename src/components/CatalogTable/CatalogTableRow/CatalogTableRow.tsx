@@ -11,9 +11,12 @@ import AddCar from '../AddCar/AddCar';
 import AlertDialog from '../../../common/AlertDialog/AlertDialog';
 
 import { Car } from '../../../interfaces/Car';
-// import { selectUser } from '../../../store/auth-slice';
 // import { deleteCar } from '../../../store/catalog-slice';
-// import { useAppSelector, useAppDispatch } from '../../../store/store';
+import {
+  useAppSelector,
+  // useAppDispatch,
+  selectUser,
+} from '../../../configureStore';
 
 type CatalogTableRowProps = {
   car: Car;
@@ -22,13 +25,12 @@ type CatalogTableRowProps = {
 
 function CatalogTableRow({ car, showActionsColumn }: CatalogTableRowProps) {
   // const dispatch = useAppDispatch();
-  // const user = useAppSelector(selectUser);
+  const user = useAppSelector(selectUser);
 
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  // const isOwner = user?.id === car.user.id;
-  const isOwner = false;
+  const isOwner = user?.id === car.user.id;
 
   const ownerControls = (
     <Box>
