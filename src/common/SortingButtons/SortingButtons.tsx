@@ -9,6 +9,8 @@ type SortingButtonsProps = {
 };
 
 function SortingButtons({ sortBy }: SortingButtonsProps) {
+  console.log(sortBy);
+
   // const dispatch = useAppDispatch();
 
   const handleAscendingSort = () => {

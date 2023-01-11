@@ -9,6 +9,12 @@ export interface User {
   jwtToken: string;
 }
 
+export interface UserState {
+  userData: User | null;
+  loading: boolean;
+  error: null | undefined | string;
+}
+
 export interface LoginUser {
   username: string;
   password: string;

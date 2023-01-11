@@ -3,7 +3,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 // Style
 import './App.scss';
 // Components
-import { RootState, useAppSelector } from '../../configureStore';
+// import { RootState, useAppSelector } from '../../configureStore';
 import Home from '../../containers/Home/Home';
 import SignIn from '../../containers/SignIn/SignIn';
 import SignUp from '../../containers/SignUp/SignUp';
@@ -11,7 +11,7 @@ import CustomRedirect from '../CustomRedirect/CustomRedirect';
 // TODO: IMPORT PAGES TO WHICH USER WILL BE REDIRECT
 
 function App() {
-  const userSessionInfo = useAppSelector((state: RootState) => state);
+  // const userSessionInfo = useAppSelector((state: RootState) => state);
   const isUserLoggedIn = false;
   //= userSessionInfo.isLoggedIn;
 

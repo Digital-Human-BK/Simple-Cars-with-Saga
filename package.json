@@ -35,7 +35,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx}": "eslint --fix --max-warnings=10"
+    "src/**/*.{ts,tsx}": "eslint --fix --max-warnings=0"
   },
   "eslintConfig": {
     "extends": [
