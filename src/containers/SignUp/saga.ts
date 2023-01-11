@@ -8,6 +8,7 @@ import { RegisterUser } from '../../interfaces/User';
 
 type SignUpApi = (registerCredentials: RegisterUser) => void;
 
+// worker
 function* createUser(
   signUpApi: SignUpApi,
   registerCredentials: RegisterUser
@@ -16,9 +17,7 @@ function* createUser(
     const response = yield call(signUpApi, registerCredentials);
     console.log(response);
 
-    // const successResponse = response.data;
-
-    if (response) {
+    if (response.status === 200) {
       yield put(
         loginRequest({
           username: registerCredentials.username,
@@ -36,6 +35,7 @@ function* createUser(
   }
 }
 
+// watcher
 export default function* signUpSaga(signUpApi: SignUpApi): unknown {
   while (true) {
     const signUpRequest = yield take(SIGNUP_REQUEST);
