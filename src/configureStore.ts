@@ -13,7 +13,7 @@ import rootReducer from './reducers/rootReducer';
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['redirect'],
+  blacklist: ['redirect', 'catalog'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -31,9 +31,15 @@ export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-export const selectUser = (state: RootState) => state.auth.userData;
+export const selectUser = (state: RootState) => state.auth.userData?.user;
+export const selectToken = (state: RootState) => state.auth.userData?.jwtToken;
 export const selectAuthError = (state: RootState) => state.auth.error;
 export const selectAuthLoading = (state: RootState) => state.auth.loading;
 
+export const selectAllCars = (state: RootState) => state.catalog.filteredCars;
+export const selectCatalogError = (state: RootState) => state.catalog.error;
+export const selectCatalogLoading = (state: RootState) => state.catalog.loading;
+
 export const selectRedirectPath = (state: RootState) => state.redirect.redirect;
+
 export default store;

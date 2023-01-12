@@ -1,15 +1,15 @@
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 
-// import { useAppSelector } from '../../../configureStore';
-// import {
-//   selectCatalogError,
-//   selectCatalogLoading,
-// } from '../../../store/catalog-slice';
+import {
+  useAppSelector,
+  selectCatalogError,
+  selectCatalogLoading,
+} from '../../../configureStore';
 
 function CatalogTableNotification() {
-  // const loading = useAppSelector(selectCatalogLoading);
-  // const error = useAppSelector(selectCatalogError);
+  const error = useAppSelector(selectCatalogError);
+  const loading = useAppSelector(selectCatalogLoading);
 
   return (
     <TableRow>
@@ -17,9 +17,9 @@ function CatalogTableNotification() {
         colSpan={13}
         sx={{ height: '400px', fontSize: '2rem', textAlign: 'center' }}
       >
-        {/* {error && error}
+        {error && error}
         {loading && 'Loading data...'}
-        {!error && !loading && 'No Data Found'} */}
+        {!error && !loading && 'No Data Found'}
       </TableCell>
     </TableRow>
   );
