@@ -4,6 +4,9 @@ import {
   GET_CARS_REQUEST,
   GET_CARS_SUCCESS,
   GET_CARS_ERROR,
+  CREATE_CAR_REQUEST,
+  CREATE_CAR_SUCCESS,
+  CREATE_CAR_ERROR,
 } from '../containers/Home/types';
 
 interface CatalogState {
@@ -22,6 +25,7 @@ const initialState: CatalogState = {
 
 function catalogReducer(state = initialState, action: AnyAction) {
   switch (action.type) {
+    // get cars
     case GET_CARS_REQUEST:
       return {
         ...state,
@@ -38,6 +42,25 @@ function catalogReducer(state = initialState, action: AnyAction) {
       return {
         ...state,
         loading: false,
+        error: action.payload,
+      };
+
+    // create car
+    case CREATE_CAR_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case CREATE_CAR_SUCCESS:
+      return {
+        cars: [...action.payload, ...state.cars],
+        filteredCars: [...action.payload, ...state.cars],
+        loading: false,
+        error: null,
+      };
+    case CREATE_CAR_ERROR:
+      return {
+        ...state,
         error: action.payload,
       };
     default:
