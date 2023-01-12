@@ -12,12 +12,12 @@ import InputAdornment from '@mui/material/InputAdornment';
 import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';
 
 import searchBarStyles from './styles';
-// import { searchCars } from '../../store/catalog-slice';
 import {
   useAppSelector,
-  // useAppDispatch,
+  useAppDispatch,
   selectUser,
 } from '../../configureStore';
+import SEARCH_CAR from './types';
 
 type SearchBarProps = {
   isAddingCar: boolean;
@@ -27,7 +27,7 @@ type SearchBarProps = {
 let initialComponentLoad = true;
 
 function SearchBar({ isAddingCar, toggleAddCar }: SearchBarProps) {
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
 
   const [search, setSearch] = useState<string>('');
@@ -38,13 +38,12 @@ function SearchBar({ isAddingCar, toggleAddCar }: SearchBarProps) {
       return;
     }
     const debounce = setTimeout(() => {
-      // dispatch(searchCars(search));
+      dispatch({ type: SEARCH_CAR, payload: search });
     }, 500);
 
     // eslint-disable-next-line consistent-return
     return () => clearTimeout(debounce);
-  }, [search]);
-  // add dispatch to dep arr
+  }, [search, dispatch]);
 
   return (
     <Grid container sx={searchBarStyles.container}>

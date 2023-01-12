@@ -15,6 +15,8 @@ import {
   EDIT_CAR_ERROR,
 } from '../containers/Home/types';
 
+import SEARCH_CAR from '../components/SearchBar/types';
+
 interface CatalogState {
   cars: Car[];
   filteredCars: Car[];
@@ -114,6 +116,25 @@ function catalogReducer(state = initialState, action: AnyAction) {
         ...state,
         error: action.payload,
       };
+
+    case SEARCH_CAR: {
+      const lowerCase = action.payload.toLocaleLowerCase();
+      if (lowerCase === '') {
+        return {
+          ...state,
+          filteredCars: [...state.cars],
+        };
+      }
+      return {
+        ...state,
+        filteredCars: state.cars.filter((item) => {
+          return Object.values(item).some((v) =>
+            v.toString().toLowerCase().includes(lowerCase)
+          );
+        }),
+      };
+    }
+
     default:
       return state;
   }
