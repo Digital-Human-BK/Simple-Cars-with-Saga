@@ -7,6 +7,12 @@ import {
   CREATE_CAR_REQUEST,
   CREATE_CAR_SUCCESS,
   CREATE_CAR_ERROR,
+  REMOVE_CAR_REQUEST,
+  REMOVE_CAR_SUCCESS,
+  REMOVE_CAR_ERROR,
+  EDIT_CAR_REQUEST,
+  EDIT_CAR_SUCCESS,
+  EDIT_CAR_ERROR,
 } from '../containers/Home/types';
 
 interface CatalogState {
@@ -59,6 +65,51 @@ function catalogReducer(state = initialState, action: AnyAction) {
         error: null,
       };
     case CREATE_CAR_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
+
+    // edit car
+    case EDIT_CAR_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case EDIT_CAR_SUCCESS: {
+      const updatedCars = state.cars.map((car) =>
+        car.id !== action.payload.id ? car : action.payload
+      );
+      return {
+        cars: [...updatedCars],
+        filteredCars: [...updatedCars],
+        loading: false,
+        error: null,
+      };
+    }
+    case EDIT_CAR_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
+
+    // remove car
+    case REMOVE_CAR_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case REMOVE_CAR_SUCCESS: {
+      const updatedCars = state.cars.filter((car) => car.id !== action.payload);
+
+      return {
+        cars: [...updatedCars],
+        filteredCars: [...updatedCars],
+        loading: false,
+        error: null,
+      };
+    }
+    case REMOVE_CAR_ERROR:
       return {
         ...state,
         error: action.payload,

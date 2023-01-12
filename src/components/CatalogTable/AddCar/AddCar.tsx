@@ -22,7 +22,10 @@ import {
   selectUser,
   selectToken,
 } from '../../../configureStore';
-import { createCarRequest } from '../../../containers/Home/actions';
+import {
+  createCarRequest,
+  editCarRequest,
+} from '../../../containers/Home/actions';
 
 type ChangeEvent =
   | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -86,7 +89,9 @@ function AddCar({ toggleMenu, data }: AddCarProps) {
       return;
     }
     if (data) {
-      dispatch(createCarRequest({ carData: newCarData, accessToken }));
+      dispatch(
+        editCarRequest({ carData: newCarData, userId: user.id, accessToken })
+      );
     } else {
       dispatch(createCarRequest({ carData: newCarData, accessToken }));
     }
@@ -116,7 +121,7 @@ function AddCar({ toggleMenu, data }: AddCarProps) {
           type="text"
           name="make"
           value={newCarData.make}
-          onChange={(ev) => handleChange(ev)}
+          onChange={handleChange}
           error={inputsTouched && !newCarData.make}
         />
       </TableCell>
@@ -127,7 +132,7 @@ function AddCar({ toggleMenu, data }: AddCarProps) {
           type="text"
           name="model"
           value={newCarData.model}
-          onChange={(ev) => handleChange(ev)}
+          onChange={handleChange}
           error={inputsTouched && !newCarData.model}
         />
       </TableCell>
@@ -139,7 +144,7 @@ function AddCar({ toggleMenu, data }: AddCarProps) {
           name="year"
           inputProps={{ min: 1 }}
           value={newCarData.year}
-          onChange={(ev) => handleChange(ev)}
+          onChange={handleChange}
           error={inputsTouched && !newCarData.year}
         />
       </TableCell>
@@ -148,7 +153,7 @@ function AddCar({ toggleMenu, data }: AddCarProps) {
           <Select
             name="engineType"
             value={newCarData.engineType}
-            onChange={(ev: SelectChangeEvent) => handleChange(ev)}
+            onChange={handleChange}
             error={inputsTouched && !newCarData.engineType}
           >
             <MenuItem value="DIESEL">DIESEL</MenuItem>
@@ -163,7 +168,7 @@ function AddCar({ toggleMenu, data }: AddCarProps) {
           <Select
             name="gearBox"
             value={newCarData.gearBox}
-            onChange={(ev: SelectChangeEvent) => handleChange(ev)}
+            onChange={handleChange}
             error={inputsTouched && !newCarData.gearBox}
           >
             <MenuItem value="MANUAL">MANUAL</MenuItem>
@@ -176,7 +181,7 @@ function AddCar({ toggleMenu, data }: AddCarProps) {
           <Select
             name="condition"
             value={newCarData.condition}
-            onChange={(ev: SelectChangeEvent) => handleChange(ev)}
+            onChange={handleChange}
             error={inputsTouched && !newCarData.condition}
           >
             <MenuItem value="NEW">NEW</MenuItem>
@@ -192,7 +197,7 @@ function AddCar({ toggleMenu, data }: AddCarProps) {
           inputProps={{ min: 1 }}
           name="horsePower"
           value={newCarData.horsePower}
-          onChange={(ev) => handleChange(ev)}
+          onChange={handleChange}
           error={inputsTouched && !newCarData.horsePower}
         />
       </TableCell>
@@ -202,7 +207,7 @@ function AddCar({ toggleMenu, data }: AddCarProps) {
           placeholder="Color"
           name="color"
           value={newCarData.color}
-          onChange={(ev) => handleChange(ev)}
+          onChange={handleChange}
           error={inputsTouched && !newCarData.color}
         />
       </TableCell>
@@ -214,7 +219,7 @@ function AddCar({ toggleMenu, data }: AddCarProps) {
           inputProps={{ min: 1 }}
           name="price"
           value={newCarData.price}
-          onChange={(ev) => handleChange(ev)}
+          onChange={handleChange}
           error={inputsTouched && !newCarData.price}
         />
       </TableCell>
@@ -224,7 +229,7 @@ function AddCar({ toggleMenu, data }: AddCarProps) {
           placeholder="City"
           name="city"
           value={newCarData.city}
-          onChange={(ev) => handleChange(ev)}
+          onChange={handleChange}
           error={inputsTouched && !newCarData.city}
         />
       </TableCell>
@@ -236,7 +241,7 @@ function AddCar({ toggleMenu, data }: AddCarProps) {
           inputProps={{ min: 1 }}
           name="mileage"
           value={newCarData.mileage}
-          onChange={(ev) => handleChange(ev)}
+          onChange={handleChange}
           error={inputsTouched && !newCarData.mileage}
         />
       </TableCell>
@@ -246,7 +251,7 @@ function AddCar({ toggleMenu, data }: AddCarProps) {
           placeholder="Extras"
           name="extras"
           value={newCarData.extras}
-          onChange={(ev) => handleChange(ev)}
+          onChange={handleChange}
           error={inputsTouched && !newCarData.extras}
         />
       </TableCell>

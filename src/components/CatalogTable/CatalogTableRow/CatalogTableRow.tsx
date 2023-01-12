@@ -11,11 +11,12 @@ import AddCar from '../AddCar/AddCar';
 import AlertDialog from '../../../common/AlertDialog/AlertDialog';
 
 import { Car } from '../../../interfaces/Car';
-// import { deleteCar } from '../../../store/catalog-slice';
+import { removeCarRequest } from '../../../containers/Home/actions';
 import {
   useAppSelector,
-  // useAppDispatch,
+  useAppDispatch,
   selectUser,
+  selectToken,
 } from '../../../configureStore';
 
 type CatalogTableRowProps = {
@@ -24,8 +25,9 @@ type CatalogTableRowProps = {
 };
 
 function CatalogTableRow({ car, showActionsColumn }: CatalogTableRowProps) {
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
+  const accessToken = useAppSelector(selectToken);
 
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -58,9 +60,12 @@ function CatalogTableRow({ car, showActionsColumn }: CatalogTableRowProps) {
         open={isDeleting}
         message="You are about to delete this car from the catalog!"
         onClose={() => setIsDeleting(false)}
-        onConfirm={() => {}}
+        onConfirm={() => {
+          dispatch(
+            removeCarRequest({ carId: car.id, userId: user.id, accessToken })
+          );
+        }}
       />
-      {/* onConfirm => dispatch(deleteCar({ carId: car.id })) */}
 
       {showActionsColumn && (
         <TableCell align="center" style={{ width: 160 }}>
