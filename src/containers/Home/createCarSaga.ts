@@ -30,8 +30,7 @@ export default function* createCarSaga(createCarApi: CreateCarApi): unknown {
   while (true) {
     const createCarRequest = yield take(CREATE_CAR_REQUEST);
     if (createCarRequest.payload) {
-      const { carData } = createCarRequest.payload;
-      const { accessToken } = createCarRequest.payload;
+      const { carData, accessToken } = createCarRequest.payload;
 
       carData.year = Number(carData.year);
       carData.horsePower = Number(carData.horsePower);

@@ -7,18 +7,12 @@ import {
   CREATE_CAR_REQUEST,
   CREATE_CAR_SUCCESS,
   CREATE_CAR_ERROR,
-  REMOVE_CAR_REQUEST,
-  REMOVE_CAR_SUCCESS,
-  REMOVE_CAR_ERROR,
   EDIT_CAR_REQUEST,
   EDIT_CAR_SUCCESS,
   EDIT_CAR_ERROR,
-  // EDIT_CAR_REQUEST,
-  // EDIT_CAR_SUCCESS,
-  // EDIT_CAR_ERROR,
-  // REMOVE_CAR_REQUEST,
-  // REMOVE_CAR_SUCCESS,
-  // REMOVE_CAR_ERROR,
+  REMOVE_CAR_REQUEST,
+  REMOVE_CAR_SUCCESS,
+  REMOVE_CAR_ERROR,
 } from './types';
 
 // get cars
@@ -69,6 +63,7 @@ export function createCarError(payload: string) {
 
 // edit car
 export function editCarRequest(payload: {
+  carData: Car | NewCar;
   userId: string;
   accessToken: string;
 }) {
