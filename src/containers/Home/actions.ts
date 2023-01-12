@@ -37,7 +37,10 @@ export function getCarsError(payload: string) {
 }
 
 // create car
-export function createCarRequest(payload: NewCar) {
+export function createCarRequest(payload: {
+  carData: NewCar | Car;
+  accessToken: string;
+}) {
   return {
     type: CREATE_CAR_REQUEST,
     payload,

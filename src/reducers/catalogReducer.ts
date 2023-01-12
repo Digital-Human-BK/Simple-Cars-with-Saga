@@ -53,8 +53,8 @@ function catalogReducer(state = initialState, action: AnyAction) {
       };
     case CREATE_CAR_SUCCESS:
       return {
-        cars: [...action.payload, ...state.cars],
-        filteredCars: [...action.payload, ...state.cars],
+        cars: [action.payload, ...state.cars],
+        filteredCars: [action.payload, ...state.cars],
         loading: false,
         error: null,
       };

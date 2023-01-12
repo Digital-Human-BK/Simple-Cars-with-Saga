@@ -14,10 +14,15 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Toast from '../../../common/Toast/Toast';
 
 import { Car, NewCar } from '../../../interfaces/Car';
-// import { validateAddCar } from '../../../utils/validateAddCar';
-// import { selectUser } from '../../../store/auth-slice';
+import validateAddCar from '../../../utils/validateAddCar';
 // import { createCar, updateCar } from '../../../store/catalog-slice';
-// import { useAppDispatch, useAppSelector } from '../../../store/store';
+import {
+  useAppDispatch,
+  useAppSelector,
+  selectUser,
+  selectToken,
+} from '../../../configureStore';
+import { createCarRequest } from '../../../containers/Home/actions';
 
 type ChangeEvent =
   | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -30,19 +35,12 @@ type AddCarProps = {
 };
 
 function AddCar({ toggleMenu, data }: AddCarProps) {
-  // const dispatch = useAppDispatch();
-  // const user = useAppSelector(selectUser);
-
-  const user = {
-    id: '1',
-    username: 'MikeLP',
-    password: '123',
-    firstName: 'Mike',
-    lastName: 'Shinoda',
-  };
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
+  const accessToken = useAppSelector(selectToken);
 
   const [inputsTouched, setInputsTouched] = useState<boolean>(false);
-  const [inputsError] = useState<null | string>(null);
+  const [inputsError, setInputsError] = useState<null | string>(null);
 
   const [newCarData, setNewCar] = useState<Car | NewCar>(() => {
     if (data) {
@@ -81,18 +79,18 @@ function AddCar({ toggleMenu, data }: AddCarProps) {
   };
 
   const handleAddCar = () => {
-    // const formIsValid = validateAddCar(newCarData);
-    // if (formIsValid === false) {
-    //   setInputsTouched(true);
-    //   setInputsError('Please fill all fields');
-    //   return;
-    // }
-    // if (data) {
-    //   dispatch(updateCar(newCarData));
-    // } else {
-    //   dispatch(createCar(newCarData));
-    // }
-    // toggleMenu();
+    const formIsValid = validateAddCar(newCarData);
+    if (formIsValid === false) {
+      setInputsTouched(true);
+      setInputsError('Please fill all fields');
+      return;
+    }
+    if (data) {
+      dispatch(createCarRequest({ carData: newCarData, accessToken }));
+    } else {
+      dispatch(createCarRequest({ carData: newCarData, accessToken }));
+    }
+    toggleMenu();
   };
 
   return (
