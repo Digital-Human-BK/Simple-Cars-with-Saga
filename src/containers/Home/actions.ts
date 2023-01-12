@@ -7,6 +7,9 @@ import {
   CREATE_CAR_REQUEST,
   CREATE_CAR_SUCCESS,
   CREATE_CAR_ERROR,
+  REMOVE_CAR_REQUEST,
+  REMOVE_CAR_SUCCESS,
+  REMOVE_CAR_ERROR,
   // EDIT_CAR_REQUEST,
   // EDIT_CAR_SUCCESS,
   // EDIT_CAR_ERROR,
@@ -57,6 +60,32 @@ export function createCarSuccess(payload: Car) {
 export function createCarError(payload: string) {
   return {
     type: CREATE_CAR_ERROR,
+    payload,
+  };
+}
+
+// remove car
+export function removeCarRequest(payload: {
+  carId: string;
+  userId: string;
+  accessToken: string;
+}) {
+  return {
+    type: REMOVE_CAR_REQUEST,
+    payload,
+  };
+}
+
+export function removeCarSuccess(payload: string) {
+  return {
+    type: REMOVE_CAR_SUCCESS,
+    payload,
+  };
+}
+
+export function removeCarError(payload: string) {
+  return {
+    type: REMOVE_CAR_ERROR,
     payload,
   };
 }
