@@ -67,6 +67,7 @@ export function createCarError(payload: string) {
 // remove car
 export function removeCarRequest(payload: {
   carId: string;
+  userId: string;
   accessToken: string;
 }) {
   return {
