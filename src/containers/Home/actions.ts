@@ -10,6 +10,9 @@ import {
   REMOVE_CAR_REQUEST,
   REMOVE_CAR_SUCCESS,
   REMOVE_CAR_ERROR,
+  EDIT_CAR_REQUEST,
+  EDIT_CAR_SUCCESS,
+  EDIT_CAR_ERROR,
   // EDIT_CAR_REQUEST,
   // EDIT_CAR_SUCCESS,
   // EDIT_CAR_ERROR,
@@ -60,6 +63,31 @@ export function createCarSuccess(payload: Car) {
 export function createCarError(payload: string) {
   return {
     type: CREATE_CAR_ERROR,
+    payload,
+  };
+}
+
+// edit car
+export function editCarRequest(payload: {
+  userId: string;
+  accessToken: string;
+}) {
+  return {
+    type: EDIT_CAR_REQUEST,
+    payload,
+  };
+}
+
+export function editCarSuccess(payload: Car) {
+  return {
+    type: EDIT_CAR_SUCCESS,
+    payload,
+  };
+}
+
+export function edinCarError(payload: string) {
+  return {
+    type: EDIT_CAR_ERROR,
     payload,
   };
 }
