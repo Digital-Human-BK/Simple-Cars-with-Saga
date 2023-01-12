@@ -12,9 +12,12 @@ import InputAdornment from '@mui/material/InputAdornment';
 import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';
 
 import searchBarStyles from './styles';
-// import { selectUser } from '../../store/auth-slice';
 // import { searchCars } from '../../store/catalog-slice';
-// import { useAppSelector, useAppDispatch } from '../../configureStore';
+import {
+  useAppSelector,
+  // useAppDispatch,
+  selectUser,
+} from '../../configureStore';
 
 type SearchBarProps = {
   isAddingCar: boolean;
@@ -25,8 +28,7 @@ let initialComponentLoad = true;
 
 function SearchBar({ isAddingCar, toggleAddCar }: SearchBarProps) {
   // const dispatch = useAppDispatch();
-  // const user = useAppSelector(selectUser);
-  const user = false;
+  const user = useAppSelector(selectUser);
 
   const [search, setSearch] = useState<string>('');
 

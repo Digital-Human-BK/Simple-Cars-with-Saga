@@ -8,7 +8,6 @@ type GetCarsApi = () => void;
 function* getAllCars(getCarsApi: GetCarsApi): unknown {
   try {
     const response = yield call(getCarsApi);
-    console.log(response);
     yield put(getCarsSuccess(response.data));
   } catch (err) {
     let message = 'Fetch data error';
