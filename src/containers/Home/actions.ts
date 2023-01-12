@@ -85,7 +85,7 @@ export function editCarSuccess(payload: Car) {
   };
 }
 
-export function edinCarError(payload: string) {
+export function editCarError(payload: string) {
   return {
     type: EDIT_CAR_ERROR,
     payload,
