@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className="App">
-      {user !== null &&
+      {user &&
       (location.pathname === '/login' || location.pathname === '/register') ? (
         <Navigate to="/" replace />
       ) : null}

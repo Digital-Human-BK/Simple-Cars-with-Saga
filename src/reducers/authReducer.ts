@@ -1,5 +1,7 @@
 import { AnyAction } from 'redux';
 
+import LOGOUT_REQUEST from '../components/NavBar/types';
+
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -63,6 +65,11 @@ function authReducer(state = initialState, action: AnyAction) {
         loading: false,
         error: action.payload,
       };
+    // ========================
+    // LOGOUT
+    // ========================
+    case LOGOUT_REQUEST:
+      return initialState;
 
     default:
       return state;
