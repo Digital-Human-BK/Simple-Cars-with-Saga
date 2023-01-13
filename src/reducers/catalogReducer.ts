@@ -16,6 +16,7 @@ import {
 } from '../containers/Home/types';
 
 import SEARCH_CAR from '../components/SearchBar/types';
+import SORT_CARS from '../common/SortingButtons/types';
 
 interface CatalogState {
   cars: Car[];
@@ -132,6 +133,26 @@ function catalogReducer(state = initialState, action: AnyAction) {
             v.toString().toLowerCase().includes(lowerCase)
           );
         }),
+      };
+    }
+
+    // sorting
+    case SORT_CARS: {
+      const sorted = [...state.filteredCars].sort((a, b) => {
+        const { key, order } = action.payload;
+        const valueA = a[key as keyof Car];
+        const valueB = b[key as keyof Car];
+        if (order === 'asc') {
+          return valueA < valueB ? -1 : 1;
+        }
+        if (order === 'desc') {
+          return valueA > valueB ? -1 : 1;
+        }
+        return 0;
+      });
+      return {
+        ...state,
+        filteredCars: sorted,
       };
     }
 

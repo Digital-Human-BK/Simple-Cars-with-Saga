@@ -1,24 +1,23 @@
 import Box from '@mui/material/Box';
 import ArrowDropUpOutlinedIcon from '@mui/icons-material/ArrowDropUpOutlined';
 import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
-// import { useAppDispatch } from '../../configureStore';
-// import { sortCars } from '../../../store/catalog-slice';
+
+import { useAppDispatch } from '../../configureStore';
+import SORT_CARS from './types';
 
 type SortingButtonsProps = {
   sortBy: string;
 };
 
 function SortingButtons({ sortBy }: SortingButtonsProps) {
-  console.log(sortBy);
-
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const handleAscendingSort = () => {
-    // dispatch(sortCars({ order: 'asc', key: sortBy }));
+    dispatch({ type: SORT_CARS, payload: { order: 'asc', key: sortBy } });
   };
 
   const handleDescendingSort = () => {
-    // dispatch(sortCars({ order: 'desc', key: sortBy }));
+    dispatch({ type: SORT_CARS, payload: { order: 'asc', key: sortBy } });
   };
 
   return (
