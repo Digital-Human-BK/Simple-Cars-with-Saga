@@ -14,7 +14,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import FormHelperText from '@mui/material/FormHelperText';
 
-import signInStyles from './styles';
+import styles from './styles.module.scss';
 import logo from '../../resources/logo.png';
 import Toast from '../../common/Toast/Toast';
 import Copyright from '../../common/Copyright/Copyright';
@@ -77,10 +77,10 @@ export default function SignIn() {
   const inputErrors = validateLogin(userCredentials, inputsTouched);
 
   return (
-    <Box component="main" sx={signInStyles.main}>
+    <Box component="main" className={styles.main}>
       <Toast error={error} loading={loading} />
-      <Container component="section" maxWidth="xs" sx={signInStyles.card}>
-        <Box sx={signInStyles.formContainer}>
+      <Container component="section" maxWidth="xs" className={styles.card}>
+        <Box className={styles.formContainer}>
           <Typography component="h1" variant="h4" fontWeight="700">
             Sign In
           </Typography>
@@ -144,7 +144,7 @@ export default function SignIn() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={signInStyles.submit}
+              className={styles.submit}
               disabled={inputErrors.formDisabled}
             >
               Sign In
@@ -165,7 +165,7 @@ export default function SignIn() {
                 <LinkComponent path="/">Continue to Catalog</LinkComponent>
               </Grid>
               <Box
-                sx={signInStyles.logo}
+                className={styles.logo}
                 component="img"
                 alt="Car logo"
                 src={logo}
