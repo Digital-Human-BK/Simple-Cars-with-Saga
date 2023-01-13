@@ -80,13 +80,7 @@ export default function SignUp() {
   ) => {
     event.preventDefault();
 
-    await dispatch(signUpRequest(userCredentials));
-    // await dispatch(
-    //   login({
-    //     username: userCredentials.username,
-    //     password: userCredentials.password,
-    //   })
-    // );
+    dispatch(signUpRequest(userCredentials));
   };
 
   return (
@@ -196,7 +190,7 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        <Copyright />
       </Container>
     </Box>
   );

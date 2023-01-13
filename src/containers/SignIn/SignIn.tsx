@@ -173,7 +173,7 @@ export default function SignIn() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 0 }} />
+        <Copyright />
       </Container>
     </Box>
   );
