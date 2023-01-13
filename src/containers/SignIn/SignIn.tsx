@@ -77,7 +77,7 @@ export default function SignIn() {
   const inputErrors = validateLogin(userCredentials, inputsTouched);
 
   return (
-    <Box component="main" className={styles.main}>
+    <Box component="main" className={styles['main-signIn']}>
       <Toast error={error} loading={loading} />
       <Container component="section" maxWidth="xs" className={styles.card}>
         <Box className={styles.formContainer}>
