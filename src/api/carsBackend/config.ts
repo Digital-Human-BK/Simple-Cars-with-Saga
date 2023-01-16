@@ -8,4 +8,4 @@ export const LOGOUT_URL = `${API_PREFIX}/users/logout`;
 
 // Catalog
 export const CAR_SERVICE = `${API_PREFIX}/cars`;
-export const GET_CARS = `${API_PREFIX}/cars/alld`;
+export const GET_CARS = `${API_PREFIX}/cars/all`;
