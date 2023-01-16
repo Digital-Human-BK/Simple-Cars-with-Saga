@@ -156,9 +156,15 @@ function catalogReducer(state = initialState, action: AnyAction) {
         const valueA = a[key as keyof Car];
         const valueB = b[key as keyof Car];
         if (order === 'asc') {
+          if (typeof valueA === 'string' && typeof valueB === 'string') {
+            return valueA.localeCompare(valueB);
+          }
           return valueA < valueB ? -1 : 1;
         }
         if (order === 'desc') {
+          if (typeof valueA === 'string' && typeof valueB === 'string') {
+            return valueB.localeCompare(valueA);
+          }
           return valueA > valueB ? -1 : 1;
         }
         return 0;
