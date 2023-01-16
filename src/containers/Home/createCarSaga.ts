@@ -20,7 +20,7 @@ function* createCar(
     if (err instanceof Error) {
       message = err.message;
     }
-    console.log(message);
+    console.error(message);
     yield put(createCarError(message));
   }
 }

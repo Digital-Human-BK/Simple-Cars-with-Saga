@@ -15,7 +15,6 @@ function* createUser(
 ): unknown {
   try {
     const response = yield call(signUpApi, registerCredentials);
-    console.log(response);
 
     if (response.status === 200) {
       yield put(
@@ -30,7 +29,7 @@ function* createUser(
     if (err instanceof Error) {
       message = err.message;
     }
-    console.log(message);
+    console.error(message);
     yield put(signUpFailure(message));
   }
 }

@@ -14,14 +14,13 @@ function* authorizeUser(
   try {
     const response = yield call(loginApi, loginCredentials);
     const userData = response.data;
-    console.log(userData);
     yield put(loginSuccess(userData));
   } catch (err) {
     let message = 'Unknown Error';
     if (err instanceof Error) {
       message = err.message;
     }
-    console.log(message);
+    console.error(message);
     yield put(loginFailure(message));
   }
 }

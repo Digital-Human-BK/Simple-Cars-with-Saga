@@ -17,7 +17,6 @@ function* removeCar(
 ): unknown {
   try {
     const response = yield call(removeCarApi, carId, userId, accessToken);
-    console.log(response);
 
     if (response.status === 200) {
       yield put(removeCarSuccess(carId));
