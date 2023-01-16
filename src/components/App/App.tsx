@@ -2,8 +2,9 @@
 import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
 // Style
 import './App.scss';
-// Components
 import { selectUser, useAppSelector } from '../../configureStore';
+
+// Components
 import Home from '../../containers/Home/Home';
 import SignIn from '../../containers/SignIn/SignIn';
 import SignUp from '../../containers/SignUp/SignUp';

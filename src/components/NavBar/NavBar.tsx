@@ -6,6 +6,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 
 import logo from '../../resources/logo-white.png';
+
 import {
   useAppSelector,
   useAppDispatch,

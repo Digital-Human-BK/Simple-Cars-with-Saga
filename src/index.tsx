@@ -26,6 +26,3 @@ root.render(
     </PersistGate>
   </Provider>
 );
-
-// window.React = React;
-// window.ReactDOM = ReactDOM;

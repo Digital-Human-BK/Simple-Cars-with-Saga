@@ -10,14 +10,14 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import AddCar from '../AddCar/AddCar';
 import AlertDialog from '../../../common/AlertDialog/AlertDialog';
 
-import { Car } from '../../../interfaces/Car';
-import { removeCarRequest } from '../../../containers/Home/actions';
 import {
   useAppSelector,
   useAppDispatch,
   selectUser,
   selectToken,
 } from '../../../configureStore';
+import { Car } from '../../../interfaces/Car';
+import { removeCarRequest } from '../../../containers/Home/actions';
 
 type CatalogTableRowProps = {
   car: Car;

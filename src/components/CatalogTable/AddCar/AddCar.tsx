@@ -13,19 +13,19 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import Toast from '../../../common/Toast/Toast';
 
-import { Car, NewCar } from '../../../interfaces/Car';
-import validateAddCar from '../../../utils/validateAddCar';
-// import { createCar, updateCar } from '../../../store/catalog-slice';
 import {
   useAppDispatch,
   useAppSelector,
   selectUser,
   selectToken,
 } from '../../../configureStore';
+
 import {
   createCarRequest,
   editCarRequest,
 } from '../../../containers/Home/actions';
+import { Car, NewCar } from '../../../interfaces/Car';
+import validateAddCar from '../../../utils/validateAddCar';
 
 type ChangeEvent =
   | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
