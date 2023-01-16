@@ -55,7 +55,7 @@ function CatalogTableRow({ car, showActionsColumn }: CatalogTableRowProps) {
     return <AddCar toggleMenu={() => setIsEditing(false)} data={car} />;
   }
   return (
-    <TableRow key={car.id}>
+    <TableRow key={car.id} sx={{ height: '65px' }}>
       <AlertDialog
         open={isDeleting}
         message="You are about to delete this car from the catalog!"
