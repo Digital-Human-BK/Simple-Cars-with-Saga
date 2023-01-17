@@ -34,7 +34,9 @@ const initialState: CatalogState = {
 
 function catalogReducer(state = initialState, action: AnyAction) {
   switch (action.type) {
-    // get cars
+    // ========================
+    // GETTING ALL CARS
+    // ========================
     case GET_CARS_REQUEST:
       return {
         ...state,
@@ -54,7 +56,9 @@ function catalogReducer(state = initialState, action: AnyAction) {
         error: action.payload,
       };
 
-    // create car
+    // ========================
+    // CREATING CAR
+    // ========================
     case CREATE_CAR_REQUEST:
       return {
         ...state,
@@ -73,7 +77,9 @@ function catalogReducer(state = initialState, action: AnyAction) {
         error: action.payload,
       };
 
-    // edit car
+    // ========================
+    // EDITING CAR
+    // ========================
     case EDIT_CAR_REQUEST:
       return {
         ...state,
@@ -96,7 +102,9 @@ function catalogReducer(state = initialState, action: AnyAction) {
         error: action.payload,
       };
 
-    // remove car
+    // ========================
+    // REMOVING CAR
+    // ========================
     case REMOVE_CAR_REQUEST:
       return {
         ...state,
@@ -118,6 +126,9 @@ function catalogReducer(state = initialState, action: AnyAction) {
         error: action.payload,
       };
 
+    // ========================
+    // SEARCHING
+    // ========================
     case SEARCH_CAR: {
       const lowerCase = action.payload.toLocaleLowerCase();
       if (lowerCase === '') {
@@ -136,16 +147,24 @@ function catalogReducer(state = initialState, action: AnyAction) {
       };
     }
 
-    // sorting
+    // ========================
+    // SORTING
+    // ========================
     case SORT_CARS: {
       const sorted = [...state.filteredCars].sort((a, b) => {
         const { key, order } = action.payload;
         const valueA = a[key as keyof Car];
         const valueB = b[key as keyof Car];
         if (order === 'asc') {
+          if (typeof valueA === 'string' && typeof valueB === 'string') {
+            return valueA.localeCompare(valueB);
+          }
           return valueA < valueB ? -1 : 1;
         }
         if (order === 'desc') {
+          if (typeof valueA === 'string' && typeof valueB === 'string') {
+            return valueB.localeCompare(valueA);
+          }
           return valueA > valueB ? -1 : 1;
         }
         return 0;

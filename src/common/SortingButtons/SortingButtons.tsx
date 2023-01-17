@@ -17,7 +17,7 @@ function SortingButtons({ sortBy }: SortingButtonsProps) {
   };
 
   const handleDescendingSort = () => {
-    dispatch({ type: SORT_CARS, payload: { order: 'asc', key: sortBy } });
+    dispatch({ type: SORT_CARS, payload: { order: 'desc', key: sortBy } });
   };
 
   return (

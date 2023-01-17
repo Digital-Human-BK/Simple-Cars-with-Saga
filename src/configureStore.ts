@@ -7,13 +7,12 @@ import storage from 'redux-persist/lib/storage';
 import { persistStore, persistReducer } from 'redux-persist';
 
 import rootSaga from './sagas/rootSaga';
-// eslint-disable-next-line import/no-cycle
 import rootReducer from './reducers/rootReducer';
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['redirect', 'catalog'],
+  blacklist: ['catalog'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -39,7 +38,5 @@ export const selectAuthLoading = (state: RootState) => state.auth.loading;
 export const selectAllCars = (state: RootState) => state.catalog.filteredCars;
 export const selectCatalogError = (state: RootState) => state.catalog.error;
 export const selectCatalogLoading = (state: RootState) => state.catalog.loading;
-
-export const selectRedirectPath = (state: RootState) => state.redirect.redirect;
 
 export default store;

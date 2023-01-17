@@ -6,6 +6,7 @@ import './App.scss';
 
 import theme from '../../utils/muiTheme';
 import { selectUser, useAppSelector } from '../../configureStore';
+
 // Components
 import Home from '../../containers/Home/Home';
 import SignIn from '../../containers/SignIn/SignIn';
