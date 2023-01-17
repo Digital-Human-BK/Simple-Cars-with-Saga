@@ -15,7 +15,7 @@ jobs:
       - run: npm i && npm run build
       - uses: rossjrw/pr-preview-action@v1
         with:
-          source-dir: .
+          source-dir: ./build/
           preview-branch: gh-pages
           umbrella-dir: pr-preview
           action: auto
