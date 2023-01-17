@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 // Router
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, HashRouter } from 'react-router-dom';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -18,11 +18,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <Provider store={store}>
     <PersistGate persistor={persistor}>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="*" element={<App />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </PersistGate>
   </Provider>
 );
