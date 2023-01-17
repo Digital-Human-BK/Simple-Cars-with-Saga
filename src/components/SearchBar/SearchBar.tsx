@@ -11,7 +11,8 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import InputAdornment from '@mui/material/InputAdornment';
 import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';
 
-import searchBarStyles from './styles';
+import styles from './styles.module.scss';
+
 import {
   useAppSelector,
   useAppDispatch,
@@ -46,19 +47,14 @@ function SearchBar({ isAddingCar, toggleAddCar }: SearchBarProps) {
   }, [search, dispatch]);
 
   return (
-    <Grid container sx={searchBarStyles.container}>
-      <Grid item xs={3}>
-        <Typography
-          variant="h5"
-          component="h2"
-          fontWeight={600}
-          sx={searchBarStyles.title}
-        >
+    <Grid container className={styles.container}>
+      <Grid item xs={6}>
+        <Typography variant="h5" component="h2" fontWeight={600}>
           Simple Cars
         </Typography>
       </Grid>
-      <Grid item xs={3}>
-        <Box sx={searchBarStyles.searchBar}>
+      <Grid item xs={6} className={styles.align}>
+        <Box>
           <TextField
             placeholder="Search by model"
             id="search"
@@ -72,7 +68,7 @@ function SearchBar({ isAddingCar, toggleAddCar }: SearchBarProps) {
                 <InputAdornment
                   component="button"
                   position="start"
-                  sx={searchBarStyles.adornment}
+                  className={styles.adornment}
                 >
                   <SearchIcon />
                 </InputAdornment>

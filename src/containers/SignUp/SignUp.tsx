@@ -14,7 +14,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import FormHelperText from '@mui/material/FormHelperText';
 
-import signUpStyles from './styles';
+import styles from './styles.module.scss';
 import Toast from '../../common/Toast/Toast';
 import Copyright from '../../common/Copyright/Copyright';
 import LinkComponent from '../../common/LinkComponent/LinkComponent';
@@ -80,20 +80,14 @@ export default function SignUp() {
   ) => {
     event.preventDefault();
 
-    await dispatch(signUpRequest(userCredentials));
-    // await dispatch(
-    //   login({
-    //     username: userCredentials.username,
-    //     password: userCredentials.password,
-    //   })
-    // );
+    dispatch(signUpRequest(userCredentials));
   };
 
   return (
-    <Box component="main" sx={signUpStyles.main}>
+    <Box component="main" className={styles['main-signUp']}>
       <Toast error={error} loading={loading} />
-      <Container component="section" maxWidth="xs" sx={signUpStyles.card}>
-        <Box sx={signUpStyles.formContainer}>
+      <Container component="section" maxWidth="xs" className={styles.card}>
+        <Box className={styles.formContainer}>
           <Typography component="h1" variant="h4" fontWeight="700">
             Sign Up
           </Typography>
@@ -101,7 +95,7 @@ export default function SignUp() {
             component="form"
             noValidate
             onSubmit={handleRegisterSubmit}
-            sx={signUpStyles.form}
+            className={styles.form}
           >
             <Grid container spacing={4}>
               <Grid item xs={12} sm={6}>
@@ -182,7 +176,7 @@ export default function SignUp() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={signUpStyles.submit}
+              className={styles.submit}
               disabled={inputErrors.formDisabled}
             >
               Sign Up
@@ -196,7 +190,7 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        <Copyright />
       </Container>
     </Box>
   );
