@@ -1,0 +1,2 @@
+const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
+export default LOGOUT_REQUEST;

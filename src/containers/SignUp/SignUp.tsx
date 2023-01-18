@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
@@ -13,61 +14,80 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import FormHelperText from '@mui/material/FormHelperText';
 
-import signUpStyles from './styles';
+import styles from './styles.module.scss';
 import Toast from '../../common/Toast/Toast';
 import Copyright from '../../common/Copyright/Copyright';
 import LinkComponent from '../../common/LinkComponent/LinkComponent';
 
-// import useRegister from '../../hooks/useRegister';
-// import { appRoutes } from '../../constants/appRoutes';
+import {
+  useAppDispatch,
+  useAppSelector,
+  selectAuthError,
+  selectAuthLoading,
+} from '../../configureStore';
+
+import { signUpRequest } from './actions';
+import validateRegister from '../../utils/validateRegister';
+import { InputsTouched, RegisterUser } from '../../interfaces/User';
+
+type ChangeEvent = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 export default function SignUp() {
-  // const {
-  //   error,
-  //   loading,
-  //   showPassword,
-  //   handleToggleShowPassword,
-  //   handleMouseDownPassword,
-  //   userCredentials,
-  //   inputErrors,
-  //   handleChange,
-  //   handleRegisterSubmit,
-  // } = useRegister();
+  const dispatch = useAppDispatch();
+  const loading = useAppSelector(selectAuthLoading);
+  const error = useAppSelector(selectAuthError);
 
-  const mock = {
-    error: null,
-    loading: false,
-    showPassword: false,
-    handleToggleShowPassword: () => {},
-    handleMouseDownPassword: () => {},
-    userCredentials: {
-      firstName: 'Mike',
-      lastName: 'Shinoda',
-      username: 'MikeLP',
-      password: '123',
-    },
-    inputErrors: false,
-    handleChange: () => {},
-    handleRegisterSubmit: () => {},
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  const [inputsTouched, setInputsTouched] = useState<InputsTouched>({
+    username: false,
+    password: false,
+    firstName: false,
+    lastName: false,
+  });
+  const [userCredentials, setUserCredentials] = useState<RegisterUser>({
+    username: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+  });
+
+  const inputErrors = validateRegister(userCredentials, inputsTouched);
+
+  const handleToggleShowPassword = () => {
+    setShowPassword((prevState) => !prevState);
   };
 
-  const {
-    error,
-    loading,
-    showPassword,
-    handleToggleShowPassword,
-    handleMouseDownPassword,
-    userCredentials,
-    // inputErrors,
-    handleChange,
-    handleRegisterSubmit,
-  } = mock;
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
+
+  const handleChange = (ev: ChangeEvent) => {
+    setInputsTouched((prevState) => ({
+      ...prevState,
+      [ev.target.name]: true,
+    }));
+    setUserCredentials((prevState) => ({
+      ...prevState,
+      [ev.target.name]: ev.target.value.trim(),
+    }));
+  };
+
+  const handleRegisterSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+
+    dispatch(signUpRequest(userCredentials));
+  };
 
   return (
-    <Box component="main" sx={signUpStyles.main}>
+    <Box component="main" className={styles['main-signUp']}>
       <Toast error={error} loading={loading} />
-      <Container component="section" maxWidth="xs" sx={signUpStyles.card}>
-        <Box sx={signUpStyles.formContainer}>
+      <Container component="section" maxWidth="xs" className={styles.card}>
+        <Box className={styles.formContainer}>
           <Typography component="h1" variant="h4" fontWeight="700">
             Sign Up
           </Typography>
@@ -75,7 +95,7 @@ export default function SignUp() {
             component="form"
             noValidate
             onSubmit={handleRegisterSubmit}
-            sx={signUpStyles.form}
+            className={styles.form}
           >
             <Grid container spacing={4}>
               <Grid item xs={12} sm={6}>
@@ -86,9 +106,9 @@ export default function SignUp() {
                   name="firstName"
                   label="First Name"
                   value={userCredentials.firstName}
-                  // error={!!inputErrors.firstNameError}
-                  // helperText={inputErrors.firstNameError}
-                  onChange={() => handleChange()}
+                  error={!!inputErrors.firstNameError}
+                  helperText={inputErrors.firstNameError}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -99,9 +119,9 @@ export default function SignUp() {
                   label="Last Name"
                   name="lastName"
                   value={userCredentials.lastName}
-                  // error={!!inputErrors.lastNameError}
-                  // helperText={inputErrors.lastNameError}
-                  onChange={() => handleChange()}
+                  error={!!inputErrors.lastNameError}
+                  helperText={inputErrors.lastNameError}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -112,16 +132,16 @@ export default function SignUp() {
                   label="Username"
                   name="username"
                   value={userCredentials.username}
-                  // error={!!inputErrors.usernameError}
-                  // helperText={inputErrors.usernameError}
-                  onChange={() => handleChange()}
+                  error={!!inputErrors.usernameError}
+                  helperText={inputErrors.usernameError}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
                 <FormControl variant="outlined" fullWidth>
                   <InputLabel
                     htmlFor="outlined-adornment-password"
-                    // error={!!inputErrors.passwordError}
+                    error={!!inputErrors.passwordError}
                   >
                     Password
                   </InputLabel>
@@ -130,8 +150,8 @@ export default function SignUp() {
                     id="outlined-adornment-password"
                     type={showPassword ? 'text' : 'password'}
                     value={userCredentials.password}
-                    onChange={() => handleChange()}
-                    // error={!!inputErrors.passwordError}
+                    onChange={handleChange}
+                    error={!!inputErrors.passwordError}
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton
@@ -147,7 +167,7 @@ export default function SignUp() {
                     label="Password"
                   />
                   <FormHelperText error>
-                    {/* {inputErrors.passwordError} */}
+                    {inputErrors.passwordError}
                   </FormHelperText>
                 </FormControl>
               </Grid>
@@ -156,8 +176,8 @@ export default function SignUp() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={signUpStyles.submit}
-              // disabled={inputErrors.formDisabled}
+              className={styles.submit}
+              disabled={inputErrors.formDisabled}
             >
               Sign Up
             </Button>
@@ -170,7 +190,7 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        <Copyright />
       </Container>
     </Box>
   );

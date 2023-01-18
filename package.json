@@ -2,6 +2,7 @@
   "name": "mobile-with-saga",
   "version": "2.0.0",
   "private": true,
+  "homepage": "https://digital-human-bk.github.io/Simple-Cars-with-Saga/",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",

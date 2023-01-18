@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -15,9 +15,12 @@ import CatalogTableRow from './CatalogTableRow/CatalogTableRow';
 import TablePaginationActions from './TablePaginationActions/TablePaginationActions';
 import CatalogTableNotification from './CatalogTableNotification/CatalogTableNotification';
 
-// import { useAppSelector } from '../../configureStore';
-// import { selectAllCars } from '../../store/catalog-slice';
-// import { selectUser } from '../../store/auth-slice';
+import {
+  useAppSelector,
+  selectAllCars,
+  selectUser,
+} from '../../configureStore';
+import { Car } from '../../interfaces/Car';
 
 type CatalogTableProps = {
   isAddingCar: boolean;
@@ -28,18 +31,17 @@ export default function CatalogTable({
   isAddingCar,
   toggleMenu,
 }: CatalogTableProps) {
-  // const user = useAppSelector(selectUser);
-  // const carData = useAppSelector(selectAllCars);
-  const carData: [] = [];
+  const user = useAppSelector(selectUser);
+  const carData: Car[] = useAppSelector(selectAllCars);
 
-  // const userIsOwner = useMemo(() => {
-  //   if (user) {
-  //     return carData.some((car) => car.user.id === user.id);
-  //   }
-  //   return false;
-  // }, [user, carData]);
+  const userIsOwner = useMemo(() => {
+    if (user) {
+      return carData.some((car) => car.user.id === user.id);
+    }
+    return false;
+  }, [user, carData]);
 
-  // const showActionsColumn = userIsOwner || isAddingCar;
+  const showActionsColumn = userIsOwner || isAddingCar;
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -75,7 +77,7 @@ export default function CatalogTable({
         sx={{ minWidth: 500 }}
         aria-label="custom pagination table"
       >
-        <CatalogTableHead showActionsColumn={false} />
+        <CatalogTableHead showActionsColumn={showActionsColumn} />
         <TableBody>
           {isAddingCar && <AddCar toggleMenu={toggleMenu} />}
           {(rowsPerPage > 0
@@ -86,9 +88,9 @@ export default function CatalogTable({
             : carData
           ).map((car) => (
             <CatalogTableRow
-              key={Math.random()}
+              key={car.id}
               car={car}
-              showActionsColumn={false}
+              showActionsColumn={showActionsColumn}
             />
           ))}
           {emptyRows > 0 && (

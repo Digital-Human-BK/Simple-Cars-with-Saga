@@ -6,15 +6,18 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 
 import logo from '../../resources/logo-white.png';
-// import { logout, selectUser } from '../../store/auth-slice';
-// import { useAppSelector, useAppDispatch } from '../../configureStore';
-// import { appRoutes } from '../../constants/appRoutes';
+
+import {
+  useAppSelector,
+  useAppDispatch,
+  selectUser,
+} from '../../configureStore';
+import LOGOUT_REQUEST from './types';
 
 export default function NavBar() {
   const navigate = useNavigate();
-  // const dispatch = useAppDispatch();
-  // const user = useAppSelector(selectUser);
-  const user = false;
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -39,8 +42,7 @@ export default function NavBar() {
             <Button
               color="inherit"
               sx={{ mr: 8 }}
-              // onClick={() => dispatch(logout())}
-              onClick={() => {}}
+              onClick={() => dispatch({ type: LOGOUT_REQUEST })}
             >
               Logout
             </Button>

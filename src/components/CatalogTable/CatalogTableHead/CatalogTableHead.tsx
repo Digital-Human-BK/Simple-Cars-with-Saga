@@ -17,7 +17,7 @@ const columns: readonly TableColumns[] = [
   { id: 'hp', label: 'Power', sortBy: 'horsePower', minWidth: 60 },
   { id: 'color', label: 'Color', sortBy: 'color', minWidth: 60 },
   { id: 'price', label: 'Price $', sortBy: 'price', minWidth: 75 },
-  { id: 'city', label: 'City', sortBy: 'city', minWidth: 65 },
+  { id: 'city', label: 'City', sortBy: 'city', minWidth: 75 },
   { id: 'mileage', label: 'Mileage', sortBy: 'mileage', minWidth: 65 },
   { id: 'extras', label: 'Extras', sortBy: 'extras', minWidth: 70 },
 ];

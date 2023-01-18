@@ -11,10 +11,14 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import InputAdornment from '@mui/material/InputAdornment';
 import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';
 
-import searchBarStyles from './styles';
-// import { selectUser } from '../../store/auth-slice';
-// import { searchCars } from '../../store/catalog-slice';
-// import { useAppSelector, useAppDispatch } from '../../configureStore';
+import styles from './styles.module.scss';
+
+import {
+  useAppSelector,
+  useAppDispatch,
+  selectUser,
+} from '../../configureStore';
+import SEARCH_CAR from './types';
 
 type SearchBarProps = {
   isAddingCar: boolean;
@@ -24,9 +28,8 @@ type SearchBarProps = {
 let initialComponentLoad = true;
 
 function SearchBar({ isAddingCar, toggleAddCar }: SearchBarProps) {
-  // const dispatch = useAppDispatch();
-  // const user = useAppSelector(selectUser);
-  const user = false;
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
 
   const [search, setSearch] = useState<string>('');
 
@@ -36,28 +39,22 @@ function SearchBar({ isAddingCar, toggleAddCar }: SearchBarProps) {
       return;
     }
     const debounce = setTimeout(() => {
-      // dispatch(searchCars(search));
+      dispatch({ type: SEARCH_CAR, payload: search });
     }, 500);
 
     // eslint-disable-next-line consistent-return
     return () => clearTimeout(debounce);
-  }, [search]);
-  // add dispatch to dep arr
+  }, [search, dispatch]);
 
   return (
-    <Grid container sx={searchBarStyles.container}>
-      <Grid item xs={3}>
-        <Typography
-          variant="h5"
-          component="h2"
-          fontWeight={600}
-          sx={searchBarStyles.title}
-        >
+    <Grid container className={styles.container}>
+      <Grid item xs={6}>
+        <Typography variant="h5" component="h2" fontWeight={600}>
           Simple Cars
         </Typography>
       </Grid>
-      <Grid item xs={3}>
-        <Box sx={searchBarStyles.searchBar}>
+      <Grid item xs={6} className={styles.align}>
+        <Box>
           <TextField
             placeholder="Search by model"
             id="search"
@@ -71,7 +68,7 @@ function SearchBar({ isAddingCar, toggleAddCar }: SearchBarProps) {
                 <InputAdornment
                   component="button"
                   position="start"
-                  sx={searchBarStyles.adornment}
+                  className={styles.adornment}
                 >
                   <SearchIcon />
                 </InputAdornment>

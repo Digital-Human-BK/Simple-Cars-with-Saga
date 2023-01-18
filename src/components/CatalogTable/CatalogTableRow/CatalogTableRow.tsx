@@ -10,10 +10,14 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import AddCar from '../AddCar/AddCar';
 import AlertDialog from '../../../common/AlertDialog/AlertDialog';
 
+import {
+  useAppSelector,
+  useAppDispatch,
+  selectUser,
+  selectToken,
+} from '../../../configureStore';
 import { Car } from '../../../interfaces/Car';
-// import { selectUser } from '../../../store/auth-slice';
-// import { deleteCar } from '../../../store/catalog-slice';
-// import { useAppSelector, useAppDispatch } from '../../../store/store';
+import { removeCarRequest } from '../../../containers/Home/actions';
 
 type CatalogTableRowProps = {
   car: Car;
@@ -21,14 +25,14 @@ type CatalogTableRowProps = {
 };
 
 function CatalogTableRow({ car, showActionsColumn }: CatalogTableRowProps) {
-  // const dispatch = useAppDispatch();
-  // const user = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
+  const accessToken = useAppSelector(selectToken);
 
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  // const isOwner = user?.id === car.user.id;
-  const isOwner = false;
+  const isOwner = user?.id === car.user.id;
 
   const ownerControls = (
     <Box>
@@ -51,14 +55,17 @@ function CatalogTableRow({ car, showActionsColumn }: CatalogTableRowProps) {
     return <AddCar toggleMenu={() => setIsEditing(false)} data={car} />;
   }
   return (
-    <TableRow key={car.id}>
+    <TableRow key={car.id} sx={{ height: '65px' }}>
       <AlertDialog
         open={isDeleting}
         message="You are about to delete this car from the catalog!"
         onClose={() => setIsDeleting(false)}
-        onConfirm={() => {}}
+        onConfirm={() => {
+          dispatch(
+            removeCarRequest({ carId: car.id, userId: user.id, accessToken })
+          );
+        }}
       />
-      {/* onConfirm => dispatch(deleteCar({ carId: car.id })) */}
 
       {showActionsColumn && (
         <TableCell align="center" style={{ width: 160 }}>
