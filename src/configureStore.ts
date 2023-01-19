@@ -38,5 +38,6 @@ export const selectAuthLoading = (state: RootState) => state.auth.loading;
 export const selectAllCars = (state: RootState) => state.catalog.filteredCars;
 export const selectCatalogError = (state: RootState) => state.catalog.error;
 export const selectCatalogLoading = (state: RootState) => state.catalog.loading;
+export const selectCatalogSort = (state: RootState) => state.catalog.sortedBy;
 
 export default store;

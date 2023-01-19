@@ -17,10 +17,12 @@ import {
 
 import SEARCH_CAR from '../components/SearchBar/types';
 import SORT_CARS from '../common/SortingButtons/types';
+import RESET_SORTING from '../common/SortingCriteria/types';
 
 interface CatalogState {
   cars: Car[];
   filteredCars: Car[];
+  sortedBy: string;
   loading: boolean;
   error: null | string | undefined;
 }
@@ -28,6 +30,7 @@ interface CatalogState {
 const initialState: CatalogState = {
   cars: [],
   filteredCars: [],
+  sortedBy: 'Random',
   loading: false,
   error: null,
 };
@@ -44,6 +47,7 @@ function catalogReducer(state = initialState, action: AnyAction) {
       };
     case GET_CARS_SUCCESS:
       return {
+        ...state,
         cars: action.payload,
         filteredCars: action.payload,
         loading: false,
@@ -66,6 +70,7 @@ function catalogReducer(state = initialState, action: AnyAction) {
       };
     case CREATE_CAR_SUCCESS:
       return {
+        ...state,
         cars: [action.payload, ...state.cars],
         filteredCars: [action.payload, ...state.cars],
         loading: false,
@@ -90,6 +95,7 @@ function catalogReducer(state = initialState, action: AnyAction) {
         car.id !== action.payload.id ? car : action.payload
       );
       return {
+        ...state,
         cars: [...updatedCars],
         filteredCars: [...updatedCars],
         loading: false,
@@ -114,6 +120,7 @@ function catalogReducer(state = initialState, action: AnyAction) {
       const updatedCars = state.cars.filter((car) => car.id !== action.payload);
 
       return {
+        ...state,
         cars: [...updatedCars],
         filteredCars: [...updatedCars],
         loading: false,
@@ -151,8 +158,9 @@ function catalogReducer(state = initialState, action: AnyAction) {
     // SORTING
     // ========================
     case SORT_CARS: {
+      const { key, order } = action.payload;
+
       const sorted = [...state.filteredCars].sort((a, b) => {
-        const { key, order } = action.payload;
         const valueA = a[key as keyof Car];
         const valueB = b[key as keyof Car];
         if (order === 'asc') {
@@ -171,7 +179,16 @@ function catalogReducer(state = initialState, action: AnyAction) {
       });
       return {
         ...state,
+        sortedBy: `${key} ${order}`,
         filteredCars: sorted,
+      };
+    }
+
+    case RESET_SORTING: {
+      return {
+        ...state,
+        filteredCars: [...state.cars],
+        sortedBy: 'Random',
       };
     }
 
