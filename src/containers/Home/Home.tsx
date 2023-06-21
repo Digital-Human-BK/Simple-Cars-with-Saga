@@ -6,6 +6,7 @@ import NavBar from '../../components/NavBar/NavBar';
 import Toast from '../../common/Toast/Toast';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import CatalogTable from '../../components/CatalogTable/CatalogTable';
+import SortingCriteria from '../../common/SortingCriteria/SortingCriteria';
 
 import {
   useAppDispatch,
@@ -32,6 +33,7 @@ function Home() {
       <Toast error={error} loading={false} />
       <NavBar />
       <SearchBar isAddingCar={isAddingCar} toggleAddCar={toggleAddCarHandler} />
+      <SortingCriteria />
       <CatalogTable
         isAddingCar={isAddingCar}
         toggleMenu={toggleAddCarHandler}
